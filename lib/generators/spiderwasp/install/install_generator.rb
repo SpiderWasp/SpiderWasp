@@ -4,7 +4,8 @@ class Spiderwasp::InstallGenerator < Rails::Generators::Base
     gem 'rack-attack'
     application %q(config.middleware.use Rack::Attack)
     initializer "spiderwasp.rb" do
-      %q(
+      %q(require 'redis'
+
 uri = URI.parse(ENV["SPIDERWASP_REDIS_URL"] || "redis://localhost:6379/" )
 $redis_conn = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 
